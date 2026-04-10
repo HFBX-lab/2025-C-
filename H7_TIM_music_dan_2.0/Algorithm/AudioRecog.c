@@ -7,6 +7,9 @@
 #define AUDIO_BUF SAMPLE_RATE*3 //音频缓冲数组
 #define TRI_THRETHOLD   0.01 //触发门限
 
+extern ADC_HandleTypeDef hadc2;
+extern TIM_HandleTypeDef htim8;
+
 uint16_t Audio_Data[AUDIO_BUF] = {0}; //音频数据数组
 float Sam_mean = 0;
 float Sam_var = 0;
@@ -24,12 +27,12 @@ void Start_Audio_Sample(void)
 	
 	__HAL_TIM_SET_AUTORELOAD(&htim3,new_arr); //设置采样率
     HAL_ADC_Start_DMA(&ADC2,(uint32_t *)Audio_Data,AUDIO_BUF);
-    HAL_TIM_Base_Start(&htim3);
+    HAL_TIM_Base_Start(&htim8);
 }
 
 void Data_Preprocess(uint16_t *pData,uint32_t len,float *Audio_buf)
 {
-    arm_mult_f32((float *)pData,&ADC_Conv_rate,Audio_buf);
+    arm_mult_f32((float *)pData,&ADC_Conv_rate,Audio_buf,len);
 }
 
 void Extract_Example_Feature(uint8_t Audio_Label,uint16_t* pData,uint32_t len) //提取样本音频特征，返回样本音频平均过零率和方差
