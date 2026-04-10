@@ -1,3 +1,6 @@
+#ifndef __XINHAO_H
+#define __XINHAO_H
+
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
@@ -40,3 +43,5 @@ void Calculate_VPP_Remove4(float *input, uint16_t length);
 
 void BLE_Send_String(char *str);
 void BLE_Send_Waveform_100 (uint8_t *wave_data);
+
+#endif
