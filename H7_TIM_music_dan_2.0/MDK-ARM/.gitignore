@@ -1,0 +1,25 @@
+# Keil 编译生成的垃圾
+*.o
+*.d
+*.crf
+*.htm
+*.dep
+*.lnp
+*.axf
+*.sct
+*.map
+*.lst
+*.obj
+*.iex
+*.htm
+*.build_log.htm
+*.uvguix.*
+*.scvd
+
+# 编译中间文件夹
+Listings/
+Objects/
+DebugConfig/
+
+# 其他
+.mxproject
