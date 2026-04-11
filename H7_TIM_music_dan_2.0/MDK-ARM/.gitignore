@@ -6,7 +6,6 @@
 *.dep
 *.lnp
 *.axf
-*.sct
 *.map
 *.lst
 *.obj
@@ -23,3 +22,5 @@ DebugConfig/
 
 # 其他
 .mxproject
+*.uvoptx
+*.uvprojx

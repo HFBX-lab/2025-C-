@@ -13,8 +13,8 @@ extern TIM_HandleTypeDef htim8;
 uint16_t Audio_Data[AUDIO_BUF] = {0}; //音频数据数组
 float Sam_mean = 0;
 float Sam_var = 0;
-float Exam_mean[8] = {}; //根据提取结果填入
-float Exam_var[8] = {}; //根据提取结果填入
+float Exam_mean[8] = {0}; //根据提取结果填入
+float Exam_var[8] = {0}; //根据提取结果填入
 float Audio_buf[AUDIO_BUF] = {0};
 float ADC_Conv_rate = 3.3f/4095;
 
@@ -25,8 +25,8 @@ void Start_Audio_Sample(void)
 	
 	uint16_t new_arr = APB2_Clock/SAMPLE_RATE - 1;
 	
-	__HAL_TIM_SET_AUTORELOAD(&htim3,new_arr); //设置采样率
-    HAL_ADC_Start_DMA(&ADC2,(uint32_t *)Audio_Data,AUDIO_BUF);
+	__HAL_TIM_SET_AUTORELOAD(&htim8,new_arr); //设置采样率
+    HAL_ADC_Start_DMA(&hadc2,(uint32_t *)Audio_Data,AUDIO_BUF);
     HAL_TIM_Base_Start(&htim8);
 }
 
@@ -37,7 +37,7 @@ void Data_Preprocess(uint16_t *pData,uint32_t len,float *Audio_buf)
 
 void Extract_Example_Feature(uint8_t Audio_Label,uint16_t* pData,uint32_t len) //提取样本音频特征，返回样本音频平均过零率和方差
 {
-    float mean = 0
+    float mean = 0;
     uint32_t cnt = 0;
     uint32_t Window_Size = AUDIO_BUF/SEG_NUM;
     float rate_mean = 0;
@@ -64,7 +64,7 @@ void Extract_Example_Feature(uint8_t Audio_Label,uint16_t* pData,uint32_t len) /
 
 void Audio_Recognize(uint16_t* pData,uint32_t len)
 {
-    float mean = 0
+    float mean = 0;
     uint32_t cnt = 0;
     uint32_t Window_Size = AUDIO_BUF/SEG_NUM;
     float rate_mean = 0;

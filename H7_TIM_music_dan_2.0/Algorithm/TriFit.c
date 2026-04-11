@@ -1,13 +1,8 @@
 #include "stm32h7xx.h"                  // Device header
 #include "arm_math.h"                   // ARM::CMSIS:DSP
-
+#include "TriFit.h"
 
 #define LEAR_FIT_POINT_NUM 		30
-
-typedef struct{
-	float k;
-	float b;
-}Line_Para;
 
 Line_Para Line_fit(uint16_t* pIndex,uint8_t Point_num,float *pPoint)
 {
@@ -25,7 +20,7 @@ Line_Para Line_fit(uint16_t* pIndex,uint8_t Point_num,float *pPoint)
 
 float CalInterPoint(Line_Para line1,Line_Para line2)
 {
-	if(line1.k - line2.k < 0.00001f) return 0;
+	if(fabs(line1.k - line2.k) < 0.00001f) return 0;
 		
 	float y = 0;
 	y = (line2.b * line1.k - line2.k - line1.b)/(line1.k - line2.k);

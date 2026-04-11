@@ -2,6 +2,7 @@
 #define __TRIFIT_H
 
 #include <stm32h7xx.h>
+#include <stdlib.h>
 
 typedef struct{
 	float k;
